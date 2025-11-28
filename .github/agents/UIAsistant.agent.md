@@ -17,6 +17,11 @@ This is an **automated UI development framework** that enables rapid creation of
 
 Current implementation: Vanilla HTML, CSS, and JavaScript (no frameworks) for maximum simplicity and portability.
 
+## Sub Agents (Delegated Steps)
+- Parse Requirements (Step 1): `./ParseRequirements.agent.md` — Extract a testable UI specification and timestamp from user descriptions/screenshots
+- Generate Code (Step 2): `./GenerateCode.agent.md` — Generate timestamped HTML/CSS/JS according to the specification
+- Deploy Locally (Step 3): `./DeployLocally.agent.md` — Start the local server and validate the UI with Playwright
+
 ## Automated UI Development Workflow
 
 ### Complete Workflow (Requirements for AI Agents)
@@ -24,22 +29,16 @@ Current implementation: Vanilla HTML, CSS, and JavaScript (no frameworks) for ma
 When a user provides a UI description or screenshot, follow this exact sequence:
 
 1. **Parse Requirements**
-   - Extract visual requirements (layout, colors, spacing, interactions)
-   - Identify functional requirements that are relevant to the UI (form validation, state management, mocked data flows)
-   - If the user mentions API integration or backend behavior, note it as a requirement to *mock* in the frontend — do NOT implement backend code
-   - Note accessibility and responsive design needs
+   - Delegated to sub agent: see `ParseRequirements.agent.md`
+   - Goal: extract layout, components, styling, interactions, accessibility, responsive behavior, and frontend mocking strategy, and produce a timestamp
 
 2. **Generate Code** (Vanilla HTML/CSS/JS pattern)
-   - Create `index_[timestamp].html` with semantic markup, proper `id` and `class` naming
-   - Create `styles_[timestamp].css` with CSS reset, flexbox/grid layouts, color scheme, hover/focus states
-   - Create `script_[timestamp].js` with event listeners, validation, and localStorage management
-   - Use consistent naming: kebab-case for classes, camelCase for JavaScript variables
-   - Timestamp format: ISO 8601 (YYYY-MM-DD-HHmmss) for filename compatibility
+   - Delegated to sub agent: see `GenerateCode.agent.md`
+   - Goal: generate the three-file structure (HTML/CSS/JS) with timestamped filenames, semantic markup, accessibility, and mocked frontend interactions
 
 3. **Deploy Locally**
-   - Run `cd e:\workspace\test_github_copilot && python -m http.server 8000` in background terminal to serve static files
-   - Verify server is running on `http://localhost:8000/index_[timestamp].html` (static preview)
-   - Reference the timestamped file in browser navigation
+   - Delegated to sub agent: see `DeployLocally.agent.md`
+   - Goal: start the local server, open the timestamped page, and validate layout, interactions, and accessibility using Playwright
 
 4. **Validate with Playwright** (Critical Step)
    - Open page: `mcp_microsoft_pla_browser_run_code` with `await page.goto('http://localhost:8000/index_[timestamp].html')`
