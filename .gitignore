@@ -1,0 +1,4 @@
+.playwright-mcp/
+*.html
+*.css
+*.js
