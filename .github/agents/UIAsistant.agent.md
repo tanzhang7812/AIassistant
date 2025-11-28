@@ -1,3 +1,6 @@
+---
+description: 'Describe what this custom agent does and when to use it.'
+---
 # UI assistant Instructions
 
 ## Project Scope
@@ -147,7 +150,7 @@ Extract: Layout type (centered modal), fields (email, password), features (remem
 **Step 3: Deploy & Validate**
 ```bash
 # Terminal command (background)
-cd e:\workspace\test_github_copilot && python -m http.server 8000
+cd e:\workspace\AIAssistant && python -m http.server 8000
 
 # Playwright validation
 await page.goto('http://localhost:8000/index_[timestamp].html');
